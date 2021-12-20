@@ -23,6 +23,7 @@ void anagram_s()
 
 void main()  {
 
+
 int i;
 char ch;
 char str[Word];
