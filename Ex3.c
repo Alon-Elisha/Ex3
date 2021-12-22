@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define Text 1024
 #define Word 30
@@ -25,154 +26,83 @@ int get_word_gv(char str[Word])
 
 
 
+/*
+bool handle_tokens(char geo[Text], char *tokens1, int sum_word)
+{
+    int i,j, sum = 0;
+    char *tokens = tokens1;
+    while(tokens != NULL && sum < sum_word)
+    {
+        int word_length = strlen(tokens);    
+        for(j = i; j < word_length && sum < sum_word; j++)
+        {
+            if ((tokens[i] >= 'a' && tokens[i]  <= 'z') || (tokens[i] >= 'A' && tokens[i]  <= 'Z'))
+            {
+                char ch = tolower(tokens[j]);
+                sum = sum + (ch - 96);
+                strncat(geo, &tokens[j], 1);
+            }
+            else
+            {
+                strncat(geo, &tokens[j], 1);
+            }
 
+        }
+        tokens = strtok(NULL, " ");
+  
+    }
+
+    if(sum == sum_word)
+    {
+        return true;
+    }
+    printf("%d\n", sum);
+    return false;
+}
+
+*/
 
 
 void gematria_s(char str[Word], char text[Text])
 {
-  
-    
-    int word_length,i, j, z, sum = 0, sum_word = get_word_gv(str), check = 0, new_word_l;
-    char ch;
-    char *tokens = strtok(text, " ");
-    char *token;
-    char *new_token;
-    int text_length = strlen(text);
-
-  
 
 
-    while(tokens != NULL)
+    int i, j, sum = 0, count = 0, pointed;
+    int sum_word = get_word_gv(str);
+    int length = strlen(text);  
+    //char geometric[Text];
+    for(int i = 0; i < length; i++)
     {
-      word_length = strlen(tokens);
-      for(i = 0; i < word_length; i++)
-      {
+     //   printf("%d", i);
+     //if(text[i] != ' ' && text[i] != '\n')
+    if ((text[i] >= 'a' && text[i]  <= 'z') || (text[i] >= 'A' && text[i]  <= 'Z'))
+        {
             sum = 0;
-            char geo[text_length];
-            for(j = i; j < word_length && sum < sum_word; j++)
+            count = 0;
+            pointed = i;
+            //strcpy(geometric, "");
+            char geometric[Text] = " ";
+            while(sum < sum_word && pointed < length)
             {
-                if ((tokens[j] >= 'a' && tokens[j]  <= 'z') || (tokens[j] >= 'A' && tokens[j]  <= 'Z'))
+                if((text[pointed] >= 'a' && text[pointed]  <= 'z') || (text[pointed] >= 'A' && text[pointed]  <= 'Z'))
                 {
-                    ch = tolower(tokens[j]);
-                    sum = sum + (ch - 96);
-                    strncat(geo, &tokens[j], 1);
-                }
-                else
-                {
-                    strncat(geo, &tokens[j], 1);
-                }
-
-            }
-         //   printf("sum word is: %d\n", sum_word);
-            if(sum == sum_word)
-            {
-                char c = '~';
-                strncat(geo, &c, 1);
-                printf("%s\n", geo);
-            }
-            else
-            {
-                new_token = tokens;
-                new_token = strtok(NULL, " ");
-                while(new_token != NULL && sum_word < sum)
-                {
-                    new_word_l = strlen(new_token);
-                    for(z = 0; z < new_word_l && sum_word > sum; z++)
-                    {
-                        if ((new_token[z] >= 'a' && new_token[z] <= 'z') || (new_token[z] >= 'A' && new_token[z] <= 'Z'))
-                        {
-                          ch = tolower(new_token[z]);
-                          sum = sum + (ch - 96);
-                          strncat(geo, &new_token[z], 1);
-                        }
-                        else
-                        {
-                          strncat(geo, &new_token[z], 1);
-                        }
-
-                    }
-
-                    new_token = strtok(NULL, " ");
-                }
-                if(sum == sum_word)
-                {
-                 char c = '~';
-                 strncat(geo, &c, 1);
-                 printf("%s\n", geo);
-                }
-               
+                    sum = sum + tolower(text[pointed]) - 96;
+                }              
+                geometric[count] = text[pointed];
+                count = count + 1;   
+                pointed++;      
             }
 
         
-       }
-   //   printf("%s\n", tokens); 
-      tokens = strtok(NULL, " ");
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    for(i = 0; i < text_length - word_length; i++)
-    {
-        if(text[i] != ' ' || text[i] !== '\n')
-        {
-            
-
-          if ((text[i] >= 'a' && text[i]  <= 'z') || (text[i] >= 'A' && text[i]  <= 'Z'))
-          {
-            int ch = tolower(text[i]) - 96;
-            sum = sum + ch;
-            count++;
-          }
-
-          if(sum == word_value)
-          {
-
-          }
+            if(sum == sum_word)
+            {
+                printf("%s~", geometric);
+            }
         }
+
     }
-    */
+    
+
 
 }
 
@@ -240,7 +170,7 @@ for(i = 0; i < Text && check == 0; i++)
 }
 
 gematria_s(str, text);
-printf("%d", get_word_gv(str));
+//printf("%d", get_word_gv(str));
 //printf("%s", text);
 
 
