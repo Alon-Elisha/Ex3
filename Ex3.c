@@ -65,7 +65,7 @@ bool handle_tokens(char geo[Text], char *tokens1, int sum_word)
 
 void gematria_s(char str[Word], char text[Text])
 {
-
+    char fulls[Text] = "";
 
     int i, j, sum = 0, count = 0, pointed;
     int sum_word = get_word_gv(str);
@@ -95,12 +95,16 @@ void gematria_s(char str[Word], char text[Text])
         
             if(sum == sum_word)
             {
-                printf("%s~", geometric);
+                strcat(fulls, geometric);
+                strcat(fulls,"~");
+                //printf("%s~", geometric);
             }
         }
 
     }
-    
+    int rem = strlen(fulls);
+    fulls[rem - 1] = '\0';
+    printf("%s", fulls);
 
 
 }
@@ -134,6 +138,7 @@ void atbash_code(char str[Word])
 
 void atbash_s(char str[Word], char text[Text])
 {
+    char fulls[Text] = "";
 
     int i, j, count = 0, count1 = 0, pointed, index, index2;
     int sum_word = get_word_gv(str);
@@ -182,7 +187,9 @@ void atbash_s(char str[Word], char text[Text])
             }
             if(flag1 == true)
             {
-                printf("%s~", at1);
+                strcat(fulls, at1);
+                strcat(fulls, "~");
+                //printf("%s~", at1);
             }
 
             count1 = 0;
@@ -216,12 +223,17 @@ void atbash_s(char str[Word], char text[Text])
             }
             if(flag2 == true)
             {
-                printf("%s~", at2);
+                strcat(fulls, at2);
+                strcat(fulls, "~");
+                //printf("%s~", at2);
             }
             
         }
         
     }
+    int rem = strlen(fulls);
+    fulls[rem - 1] = '\0';
+    printf("%s", fulls);
 }
 
 
@@ -253,6 +265,7 @@ void removeChar(char * str, char charToRemmove){
 
 void anagram_s(char str[Word], char text[Text])
 {
+    char fulls[Text] = "";
     int i, j, count = 0, pointed;
     int sum_word = get_word_gv(str);
     int length = strlen(text);  
@@ -295,13 +308,16 @@ void anagram_s(char str[Word], char text[Text])
             }
             if(have[0] == '\0')
             {
-                printf("%s~", letters);
+                strcat(fulls, letters);
+                strcat(fulls, "~");
+                //printf("%s~", letters);
             }
 
         }
     }
-
-
+    int rem = strlen(fulls);
+    fulls[rem - 1] = '\0';
+    printf("%s", fulls);
     
 }
 
@@ -310,6 +326,7 @@ void anagram_s(char str[Word], char text[Text])
 
 
 void main()  {
+
 
 
 
