@@ -135,23 +135,90 @@ void atbash_code(char str[Word])
 void atbash_s(char str[Word], char text[Text])
 {
 
-    int i, j, count = 0, pointed;
+    int i, j, count = 0, count1 = 0, pointed, index, index2;
     int sum_word = get_word_gv(str);
     int length = strlen(text);  
-    bool flag = true;
+    bool flag1 = true, flag2 = true;
     int size = 0;
     char atbash1[Word] = " ";
     char atbash2[Word] = " ";
-    strcpy(atbash1, str);
-    strcpy(atbash2, str);
-    atbash_code(atbash1);
-    atbash_code(atbash2);
     for(i = 0; i < length; i++)
     {
         if ((text[i] >= 'a' && text[i]  <= 'z') || (text[i] >= 'A' && text[i]  <= 'Z'))
         {
             count = 0;
             pointed = i;
+            index = 0;
+            flag1 = true;
+            strcpy(atbash1, str);
+            strcpy(atbash2, str);
+            atbash_code(atbash1);
+            atbash_code(atbash2);
+
+            char at1[Text] = " ";
+            while(flag1 == true && count != strlen(atbash1))
+            {
+               // printf("hey\n");
+                if(text[pointed] == atbash1[count])
+                {
+                   // printf("i = %d index = %d and str = %s\n", i, index, at1);
+                    at1[index] = text[pointed];
+                    count++;
+                    pointed++;
+                    index++;
+                }
+                else{
+                    if(text[pointed] != ' ' || text[pointed] != '\n')
+                    {
+                        flag1 = false;
+                    }
+                    else
+                    {
+                        at1[index] = text[pointed];
+                        pointed++;
+                        index++;
+                    }
+                }
+            }
+            if(flag1 == true)
+            {
+                printf("%s~", at1);
+            }
+
+            count1 = 0;
+            int pointed1 = i;
+            int index1 = 0;
+            flag2 = true;
+            char at2[Text] = " ";
+            while(flag2 == true && count1 != strlen(atbash2))
+            {
+               // printf("hey\n");
+                if(text[pointed1] == atbash1[count1])
+                {
+                   // printf("i = %d index = %d and str = %s\n", i, index, at1);
+                    at2[index1] = text[pointed1];
+                    count1++;
+                    pointed1++;
+                    index1++;
+                }
+                else{
+                    if(text[pointed1] != ' ' || text[pointed1] != '\n')
+                    {
+                        flag2 = false;
+                    }
+                    else
+                    {
+                        at2[index] = text[pointed1];
+                        pointed1++;
+                        index1++;
+                    }
+                }
+            }
+            if(flag2 == true)
+            {
+                printf("%s~", at2);
+            }
+            
         }
         
     }
@@ -244,11 +311,7 @@ void anagram_s(char str[Word], char text[Text])
 
 void main()  {
 
-char str[] = "aabzAX";
-atbash_code(str);
-printf("%s", str);
-  
-/*
+
 
 int i;
 char ch;
@@ -299,13 +362,18 @@ for(i = 0; i < Text && check == 0; i++)
    
 }
 
-
-//gematria_s(str, text);
+printf("Gematria Sequences: ");
+gematria_s(str, text);
+printf("\n");
+//anagram_s(str,text);
+printf("Atbash Sequences: ");
+atbash_s(str, text);
+printf("\n");
+printf("Anagram Sequences: ");
 anagram_s(str,text);
-
 //printf("%d", get_word_gv(str));
 //printf("%s", text);
 
-*/
+
 
 }
