@@ -65,7 +65,7 @@ bool handle_tokens(char geo[Text], char *tokens1, int sum_word)
 
 void gematria_s(char str[Word], char text[Text])
 {
-    char fulls[Text] = "";
+    char fulls[Text] = " ";
     int fulls_count = 0;
 
     int i, j, sum = 0, count = 0, pointed;
@@ -148,7 +148,7 @@ void atbash_code(char str[Word])
 
 void atbash_s(char str[Word], char text[Text])
 {
-    char fulls[Text] = "";
+    char fulls[Text] = " ";
     int fulls_count = 0;
 
     int i, j, count = 0, count1 = 0, pointed, index, index2;
@@ -292,7 +292,7 @@ void removeChar(char * str, char charToRemmove){
 
 void anagram_s(char str[Word], char text[Text])
 {
-    char fulls[Text] = "";
+    char fulls[Text] = " ";
     int fulls_count = 0;
 
     int i, j, count = 0, pointed;
@@ -365,7 +365,6 @@ void anagram_s(char str[Word], char text[Text])
 void main()  {
 
 
-
 int i;
 char ch;
 char str[Word];
@@ -405,19 +404,8 @@ for(i = 0; i < Text && check == 0; i++)
     {
         text[i] = ch;
     }
-    /*
-    else
-    { 
-         if(ch == '\n')
-         {
-            text[i] = ' ';
-         }
-         else
-         {
-             text[i] = ch;
-         }
-    }
-    */
+  
+    
    
 }
 
@@ -430,7 +418,6 @@ atbash_s(str, text);
 printf("\n");
 printf("Anagram Sequences: ");
 anagram_s(str,text);
-printf("\n");
 //
 
 
