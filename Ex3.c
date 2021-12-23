@@ -66,6 +66,7 @@ bool handle_tokens(char geo[Text], char *tokens1, int sum_word)
 void gematria_s(char str[Word], char text[Text])
 {
     char fulls[Text] = "";
+    int fulls_count = 0;
 
     int i, j, sum = 0, count = 0, pointed;
     int sum_word = get_word_gv(str);
@@ -95,8 +96,17 @@ void gematria_s(char str[Word], char text[Text])
         
             if(sum == sum_word)
             {
-                strcat(fulls, geometric);
-                strcat(fulls,"~");
+                int news = 0;
+                int new_len = strlen(geometric);
+                for(news= 0; news < new_len; news++)
+                {
+                    fulls[fulls_count] = geometric[news];
+                    fulls_count++;
+                }
+                fulls[fulls_count] = '~';
+                fulls_count++;
+                //strcat(fulls, geometric);
+                //strcat(fulls,"~");
                 //printf("%s~", geometric);
             }
         }
@@ -139,6 +149,7 @@ void atbash_code(char str[Word])
 void atbash_s(char str[Word], char text[Text])
 {
     char fulls[Text] = "";
+    int fulls_count = 0;
 
     int i, j, count = 0, count1 = 0, pointed, index, index2;
     int sum_word = get_word_gv(str);
@@ -187,8 +198,16 @@ void atbash_s(char str[Word], char text[Text])
             }
             if(flag1 == true)
             {
-                strcat(fulls, at1);
-                strcat(fulls, "~");
+                int iz = 0;
+                for(iz = 0; iz < strlen(at1); iz++)
+                {
+                    fulls[fulls_count] = at1[iz];
+                    fulls_count++;
+                }
+                fulls[fulls_count] = '~';
+                fulls_count++;
+                //strcat(fulls, at1);
+                //strcat(fulls, "~");
                 //printf("%s~", at1);
             }
 
@@ -223,8 +242,16 @@ void atbash_s(char str[Word], char text[Text])
             }
             if(flag2 == true)
             {
-                strcat(fulls, at2);
-                strcat(fulls, "~");
+                int iz = 0;
+                for(iz = 0; iz < strlen(at2); iz++)
+                {
+                    fulls[fulls_count] = at2[iz];
+                    fulls_count++;
+                }
+                fulls[fulls_count] = '~';
+                fulls_count++;
+                //strcat(fulls, at2);
+                //strcat(fulls, "~");
                 //printf("%s~", at2);
             }
             
@@ -266,6 +293,8 @@ void removeChar(char * str, char charToRemmove){
 void anagram_s(char str[Word], char text[Text])
 {
     char fulls[Text] = "";
+    int fulls_count = 0;
+
     int i, j, count = 0, pointed;
     int sum_word = get_word_gv(str);
     int length = strlen(text);  
@@ -308,8 +337,16 @@ void anagram_s(char str[Word], char text[Text])
             }
             if(have[0] == '\0')
             {
-                strcat(fulls, letters);
-                strcat(fulls, "~");
+                int zx = 0;
+                for(zx = 0; zx < strlen(letters); zx++)
+                {
+                    fulls[fulls_count] = letters[zx];
+                    fulls_count++;
+                }
+                fulls[fulls_count] = '~';
+                fulls_count++;
+                //strcat(fulls, letters);
+                //strcat(fulls, "~");
                 //printf("%s~", letters);
             }
 
@@ -326,7 +363,6 @@ void anagram_s(char str[Word], char text[Text])
 
 
 void main()  {
-
 
 
 
@@ -366,6 +402,11 @@ for(i = 0; i < Text && check == 0; i++)
         check = 1;
     }
     else
+    {
+        text[i] = ch;
+    }
+    /*
+    else
     { 
          if(ch == '\n')
          {
@@ -376,6 +417,7 @@ for(i = 0; i < Text && check == 0; i++)
              text[i] = ch;
          }
     }
+    */
    
 }
 
@@ -389,7 +431,7 @@ printf("\n");
 printf("Anagram Sequences: ");
 anagram_s(str,text);
 //printf("%d", get_word_gv(str));
-//printf("%s", text);
+//
 
 
 
