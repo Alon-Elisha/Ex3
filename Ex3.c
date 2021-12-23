@@ -430,6 +430,7 @@ atbash_s(str, text);
 printf("\n");
 printf("Anagram Sequences: ");
 anagram_s(str,text);
+printf("\n");
 //printf("%d", get_word_gv(str));
 //
 
