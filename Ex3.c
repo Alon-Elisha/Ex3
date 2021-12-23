@@ -80,7 +80,6 @@ void gematria_s(char str[Word], char text[Text])
             sum = 0;
             count = 0;
             pointed = i;
-            //strcpy(geometric, "");
             char geometric[Text] = " ";
             while(sum < sum_word && pointed < length)
             {
@@ -106,19 +105,150 @@ void gematria_s(char str[Word], char text[Text])
 
 }
 
-void atbash_s()
-{
 
+
+
+void atbash_code(char str[Word])
+{
+    int i, pos;
+    for(i = 0; i < strlen(str); i++)
+    {
+        pos = 0;
+        if( str[i] >= 65 && str[i] <= 90)
+        {
+            pos = str[i] - 65;
+            pos = 25 - pos;
+            str[i] = pos + 65;
+        }
+        if( str[i] >= 97 && str[i] <= 122)
+        {
+            pos = str[i] - 97;
+            pos = 25 - pos;
+            str[i] = pos + 97;
+        }
+    }
 }
 
 
-void anagram_s()
+
+
+void atbash_s(char str[Word], char text[Text])
 {
+
+    int i, j, count = 0, pointed;
+    int sum_word = get_word_gv(str);
+    int length = strlen(text);  
+    bool flag = true;
+    int size = 0;
+    char atbash1[Word] = " ";
+    char atbash2[Word] = " ";
+    strcpy(atbash1, str);
+    strcpy(atbash2, str);
+    atbash_code(atbash1);
+    atbash_code(atbash2);
+    for(i = 0; i < length; i++)
+    {
+        if ((text[i] >= 'a' && text[i]  <= 'z') || (text[i] >= 'A' && text[i]  <= 'Z'))
+        {
+            count = 0;
+            pointed = i;
+        }
+        
+    }
+}
+
+
+
+
+
+void removeChar(char * str, char charToRemmove){
+    int i, j, check = 0;
+    int len = strlen(str);
+    //char str[Word] = " ";
+    for(i=0; i<len; i++)
+    {
+        if(str[i] == charToRemmove && check == 0)
+        {
+            for(j=i; j<len; j++)
+            {
+                str[j] = str[j+1];
+            }
+            len--;
+            i--;
+            check = 1;
+        }
+    }
     
 }
 
+
+
+
+void anagram_s(char str[Word], char text[Text])
+{
+    int i, j, count = 0, pointed;
+    int sum_word = get_word_gv(str);
+    int length = strlen(text);  
+    bool flag = true;
+    int size = 0;
+    // every letter
+    for(i = 0; i < length; i++)
+    {
+        
+        size = 0;
+        count = 0;
+        pointed = i;
+        // start from not space and alphabet
+        if ((text[i] >= 'a' && text[i]  <= 'z') || (text[i] >= 'A' && text[i]  <= 'Z'))
+        {
+            // inital values and string to hold
+            count = 0;
+            pointed = i;
+            flag = true;
+            char letters[Text] = " ";
+            char let[Word] = " ";
+            char have[Word] = " ";
+            strcpy(have, str);
+            strcpy(let,str);
+            while(flag == true)
+            {
+                // pointer to first occurence
+                char *ch = strchr(str, text[pointed]);
+                if(ch != NULL)
+                {
+                    removeChar(have, text[pointed]);
+                    letters[count] = text[pointed];
+                    count++;
+                    pointed++;
+                }
+                else
+                {            
+                    flag = false;       
+                }
+            }
+            if(have[0] == '\0')
+            {
+                printf("%s~", letters);
+            }
+
+        }
+    }
+
+
+    
+}
+
+
+
+
+
 void main()  {
 
+char str[] = "aabzAX";
+atbash_code(str);
+printf("%s", str);
+  
+/*
 
 int i;
 char ch;
@@ -169,10 +299,13 @@ for(i = 0; i < Text && check == 0; i++)
    
 }
 
-gematria_s(str, text);
+
+//gematria_s(str, text);
+anagram_s(str,text);
+
 //printf("%d", get_word_gv(str));
 //printf("%s", text);
 
-
+*/
 
 }
