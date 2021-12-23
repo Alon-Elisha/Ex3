@@ -345,9 +345,6 @@ void anagram_s(char str[Word], char text[Text])
                 }
                 fulls[fulls_count] = '~';
                 fulls_count++;
-                //strcat(fulls, letters);
-                //strcat(fulls, "~");
-                //printf("%s~", letters);
             }
 
         }
